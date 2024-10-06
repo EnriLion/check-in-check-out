@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -21,8 +22,8 @@ public class PersonController {
     private PersonService personService;
 
     @PostMapping("/checkin")
-    public ResponseEntity<PersonModel> loginCheckIn(@RequestParam String namePerson, @RequestParam LocalDate checkInTime){
-        PersonModel personModel = personService.registerCheckIn(namePerson, checkInTime);
+    public ResponseEntity<PersonModel> loginCheckIn(@RequestParam String namePerson){
+        PersonModel personModel = personService.registerCheckIn(namePerson);
         return ResponseEntity.ok(personModel);
     }
 

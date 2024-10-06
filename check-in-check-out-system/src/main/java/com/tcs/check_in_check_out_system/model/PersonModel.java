@@ -3,6 +3,7 @@ package com.tcs.check_in_check_out_system.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "person")
@@ -15,10 +16,10 @@ public class PersonModel {
     private String namePerson;
 
     @Column(name = "check_in_time")
-    private LocalDate checkInTime;
+    private LocalDateTime checkInTime;
 
     @Column(name = "check_out_time")
-    private LocalDate checkOutTime;
+    private LocalDateTime checkOutTime;
 
     //Getter & Setters
 
@@ -38,19 +39,19 @@ public class PersonModel {
         this.namePerson = namePerson;
     }
 
-    public LocalDate getCheckInTime(){
+    public LocalDateTime getCheckInTime(){
         return checkInTime;
     }
 
-    public void setCheckInTime(LocalDate checkInTime){
+    public void setCheckInTime(LocalDateTime checkInTime){
         this.checkInTime = checkInTime;
     }
 
-    public LocalDate getCheckOutTime(){
+    public LocalDateTime getCheckOutTime(){
         return checkOutTime;
     }
 
-    public void setCheckOutTime(LocalDate checkOutTime){
+    public void setCheckOutTime(LocalDateTime checkOutTime){
         this.checkOutTime = checkOutTime;
     }
 

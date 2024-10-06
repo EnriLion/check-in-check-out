@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -21,11 +22,11 @@ public class PersonService {
     //4) Provide functionality for deleting records if needed //Delete
 
     //1
-    public PersonModel registerCheckIn(String namePerson, LocalDate checkInTime) {
+    public PersonModel registerCheckIn(String namePerson) {
         PersonModel personModel = new PersonModel();
         personModel.setNamePerson(namePerson);
-        personModel.setCheckInTime(checkInTime);
-        personModel.setCheckOutTime(checkInTime);
+//        personModel.setCheckInTime(checkInTime);
+        personModel.setCheckOutTime(LocalDateTime.now());
         return personRepository.save(personModel);
     }
 
