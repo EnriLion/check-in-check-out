@@ -28,7 +28,7 @@ This system is made with Springboot to create this project I used Java version 1
  |    ├── resources
  |     ├── static
  |     ├── templates
- |     ├── $${\color{red}application.properties}$$
+ |     ├── application.properties
  ...
 
 ```
@@ -77,8 +77,8 @@ We are going to start creating the Model as a good practice
  |    ├── java
  |     ├── com.tcs.check_in_check_out_system
  |      ├── controller
- |      ├── $${\color{red}model}$$
- |        ├── $${\color{red}PersonModel.java}$$
+ |      ├── model
+ |        ├── PersonModel.java
  |      ├── repository
  |      ├── service
  |      ├── CheckInCheckOutSystemApplication.java
@@ -206,8 +206,8 @@ This is the structure of the project where the Service package is already create
  |     ├── com.tcs.check_in_check_out_system
  |      ├── controller
  |      ├── model 
- |      ├── $${\color{red}service}$$
- |        ├── $${\color{red}PersonService.java}$$
+ |      ├── service
+ |        ├── PersonService.java
  |      ├── CheckInCheckOutSystemApplication.java
  ...
 ```
@@ -279,7 +279,6 @@ As you appreciated I have different methods in this I will describre what each m
 
 > import com.tcs.check_in_check_out_system.model.PersonModel; = We are importing the Model because we are going to use it later
 > import com.tcs.check_in_check_out_system.repository.PersonRepository; = We are importing the repository with the same purpose as I explained  as the previor statement
-
 
 
 
