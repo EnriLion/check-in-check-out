@@ -23,8 +23,12 @@ public class PersonController {
 
     @PostMapping("/checkin")
     public ResponseEntity<PersonModel> loginCheckIn(@RequestParam String namePerson){
-        PersonModel personModel = personService.registerCheckIn(namePerson);
-        return ResponseEntity.ok(personModel);
+        if (namePerson.isEmpty()) {
+           return  ResponseEntity.notFound().build();
+        } else {
+            PersonModel personModel = personService.registerCheckIn(namePerson);
+            return ResponseEntity.ok(personModel);
+        }
     }
 
     @GetMapping("/records")
@@ -49,6 +53,6 @@ public class PersonController {
     @DeleteMapping("/{id}/delete")
     public ResponseEntity<Void> deleteRecord(@PathVariable Long id) {
         personService.deleteRecord(id);
-        return ResponseEntity.noContent().build(); //204
+        return ResponseEntity.noContent().build();
     }
 }

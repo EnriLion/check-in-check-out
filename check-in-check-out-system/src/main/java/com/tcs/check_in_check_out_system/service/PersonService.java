@@ -5,11 +5,12 @@ import com.tcs.check_in_check_out_system.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import static java.time.LocalDateTime.now;
 
 @Service
 public class PersonService {
@@ -25,7 +26,7 @@ public class PersonService {
     public PersonModel registerCheckIn(String namePerson) {
         PersonModel personModel = new PersonModel();
         personModel.setNamePerson(namePerson);
-//        personModel.setCheckInTime(checkInTime);
+        personModel.setCheckInTime(LocalDateTime.now());
         personModel.setCheckOutTime(LocalDateTime.now());
         return personRepository.save(personModel);
     }
@@ -42,11 +43,10 @@ public class PersonService {
     //3
     public PersonModel updateCheckOut(Long id) {
         PersonModel personModel = personRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        personModel.setCheckOutTime(LocalDate.now());
+        personModel.setCheckOutTime(now());
         PersonModel updatedPerson = personRepository.save(personModel);
         return updatedPerson;
     }
-
 
     //4
     public void deleteRecord(Long id){

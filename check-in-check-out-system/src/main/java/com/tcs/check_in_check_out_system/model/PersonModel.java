@@ -1,8 +1,12 @@
 package com.tcs.check_in_check_out_system.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.GenerationType;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
