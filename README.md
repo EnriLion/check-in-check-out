@@ -213,7 +213,6 @@ This is the structure of the project where the Service package is already create
 ```
 
 
-### Controller 
 Let's check out what is in the shell of our PersonService.java file
 
 ```
@@ -277,12 +276,39 @@ public class PersonService {
 
 As you appreciated I have different methods in this I will describre what each method(services) are doing as well as the different annotations
 
-> import com.tcs.check_in_check_out_system.model.PersonModel; = We are importing the Model because we are going to use it later
-> import com.tcs.check_in_check_out_system.repository.PersonRepository; = We are importing the repository with the same purpose as I explained  as the previor statement
+> 1. import com.tcs.check_in_check_out_system.model.PersonModel; = We are importing the Model because we are going to use it later
+
+> 2. import com.tcs.check_in_check_out_system.repository.PersonRepository; = We are importing the repository with the same purpose as I explained  as the previous statement
+
+> 3. [import org.springframework.beans.factory.annotation.Autowired] (https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/annotation/Autowired.html) = Create a constructor facilitating the Spring dependency injection(Enables to turn Java classes into managed objects and to inject them into any other managed object)
+
+> 4. import org.springframework.stereotype.Service; = Make a reference to used the @Service annotation in the framework
+
+> 5. import java.time.LocalDateTime;
+
+>  - import java.time.ArrayList;
+
+>  - import java.util.List;
+
+>  - import java.util.NoSuchElementException;
+
+>  - import static java.util.NoSuchElementException;
+
+> These imports are going to help us to use the different methods to complete Services or methods and their functionality
+
+> 6. @Service = We are telling SpringBoot that  this is our Service class 
+
+> 7. @Autowired = Makes easier indepency injection automatically.
+
+> 8. private PersonRepository personRepository = this is a private declaration of the interface with the objective to parsing the fields later.
 
 
 
-## [2-Setup Docker Container ](https://start.spring.io/)
+
+### Controller 
+
+
+## [2-Setup Docker Container ](https://docs.docker.com/get-started/)
 > Install [Docker](https://www.docker.com/)
 
 1. After installing docker we could use it with **Docker compose**
