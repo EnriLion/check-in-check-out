@@ -38,7 +38,7 @@ This file $${\color{red}application.properties}$$  contains different configurat
 
 **Be sure the Database configuration link to the server or to your localhost is up to date**
 
- ```
+ ``` java
 spring.application.name=check-in-check-out-system
 spring.datasource.url=jdbc:mysql://localhost:3306/check_db
 spring.datasource.username=root
@@ -86,7 +86,7 @@ We are going to start creating the Model as a good practice
 ```
 Inside of PersonModel.java
 
-```
+```java
 package com.tcs.check_in_check_out_system.model;
 
 import jakarta.persistence.Id;
@@ -174,7 +174,7 @@ Time to create the Repository package in this case is an Interface :
 ```
 Using an interface allows us to controll the multiple request for that reason we are not using an Abstract Class let's see what is under the hood our Interface.
 
-```
+```java
 package com.tcs.check_in_check_out_system.repository;
 
 import com.tcs.check_in_check_out_system.model.PersonModel;
@@ -210,12 +210,13 @@ This is the structure of the project where the Service package is already create
  |        ├── PersonService.java
  |      ├── CheckInCheckOutSystemApplication.java
  ...
+
 ```
 
 
 Let's check out what is in the shell of our PersonService.java file
 
-```
+```java
 package com.tcs.check_in_check_out_system.service;
 
 import com.tcs.check_in_check_out_system.model.PersonModel;
@@ -307,7 +308,7 @@ As you appreciated I have different methods in this I will describre what each m
 
 ### Controller 
 
-```
+```java
 package com.tcs.check_in_check_out_system.controller;
 
 import com.tcs.check_in_check_out_system.model.PersonModel;
@@ -392,7 +393,7 @@ public class PersonController {
 
  - Time to see what's inside our docker-compose you can use a template or take a look at the [mysql image documentation](https://hub.docker.com/_/mysql)because there's an example there.Furthermore, you can use my **Docker compose** :
 
-```
+```docker
 name: check_database
 services:
   db:
@@ -414,7 +415,7 @@ volumes:
 > Remember the indentation it's important if you want to create a good file you can create read the [documentation](https://docs.docker.com/compose/gettingstarted/)
 
 - Now it's time to build and run our file with compose
-```
+```bash
 docker compose up  -d --build .
 ```
 > [ docker compose up = create and restart containers + --d (run containers in the background) + --build(build images before starting containers) .(all the yaml files as well we can specify if we have different yamls in the directory)] (https://docs.docker.com/reference/cli/docker/compose/up/)
