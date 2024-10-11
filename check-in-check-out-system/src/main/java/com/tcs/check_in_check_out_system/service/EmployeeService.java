@@ -1,7 +1,7 @@
 package com.tcs.check_in_check_out_system.service;
 
 import com.tcs.check_in_check_out_system.model.EmployeeModel;
-import com.tcs.check_in_check_out_system.repository.PersonRepository;
+import com.tcs.check_in_check_out_system.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import static java.time.LocalDateTime.now;
 @Service
 public class PersonService {
     @Autowired
-    private PersonRepository personRepository;
+    private EmployeeRepository employeeRepository;
 
     //1) Allows users to register a check-in //Post
     //2) Retrieve check-in and check-out records. //Get
@@ -35,13 +35,13 @@ public class PersonService {
         employeeModel.setPosition(position);
         employeeModel.setEmail(email);
         employeeModel.setPhone(phone);
-        return personRepository.save(employeeModel);
+        return employeeRepository.save(employeeModel);
     }
 
     //2
     public List<EmployeeModel> getRecords(){
         List<EmployeeModel> records = new ArrayList<>();
-        for(EmployeeModel employeeModel : personRepository.findAll()){
+        for(EmployeeModel employeeModel : employeeRepository.findAll()){
             records.add(employeeModel);
         }
         return records;
@@ -49,52 +49,52 @@ public class PersonService {
 
     //3
     public EmployeeModel updateCheckOut(Long id) {
-        EmployeeModel employeeModel = personRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        EmployeeModel employeeModel = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
         employeeModel.setCheckOutTime(now());
-        EmployeeModel updatedPerson = personRepository.save(employeeModel);
+        EmployeeModel updatedPerson = employeeRepository.save(employeeModel);
         return updatedPerson;
     }
 
     //4
     public void deleteRecord(Long id){
-        personRepository.deleteById(id);
+        employeeRepository.deleteById(id);
     }
 
     //5
     public EmployeeModel updateName(Long id, String name) {
-        EmployeeModel employeeModel = personRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        EmployeeModel employeeModel = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
         employeeModel.setName(name);
-        EmployeeModel updatedPerson = personRepository.save(employeeModel);
+        EmployeeModel updatedPerson = employeeRepository.save(employeeModel);
         return updatedPerson;
     }
 
     public EmployeeModel updatePosition(Long id, String position){
-        EmployeeModel employeeModel = personRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        EmployeeModel employeeModel = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
         employeeModel.setPosition(position);
-        return personRepository.save(employeeModel);
+        return employeeRepository.save(employeeModel);
     }
 
     public EmployeeModel updateEmail(Long id, String  email) {
-        EmployeeModel employeeModel = personRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        EmployeeModel employeeModel = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
         employeeModel.setEmail(email);
-        return personRepository.save(employeeModel);
+        return employeeRepository.save(employeeModel);
     }
 
     public EmployeeModel updatePhone(Long id, String  phone) {
-        EmployeeModel employeeModel = personRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        EmployeeModel employeeModel = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
         employeeModel.setPhone(phone);
-        return personRepository.save(employeeModel);
+        return employeeRepository.save(employeeModel);
     }
 
     public EmployeeModel updateDepartment(Long id, String  department) {
-        EmployeeModel employeeModel = personRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        EmployeeModel employeeModel = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
         employeeModel.setDepartment(department);
-        return personRepository.save(employeeModel);
+        return employeeRepository.save(employeeModel);
     }
 
     //6
     public List<EmployeeModel> getRecordId(Long id){
-        EmployeeModel employeeModel = personRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        EmployeeModel employeeModel = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
         List<EmployeeModel> records = new LinkedList<>();
         records.add(employeeModel);
         return records;
