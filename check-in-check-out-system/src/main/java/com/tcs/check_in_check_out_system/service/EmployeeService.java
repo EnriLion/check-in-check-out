@@ -4,6 +4,8 @@ import com.tcs.check_in_check_out_system.model.CheckInModel;
 import com.tcs.check_in_check_out_system.model.EmployeeModel;
 import com.tcs.check_in_check_out_system.repository.CheckInRepository;
 import com.tcs.check_in_check_out_system.repository.EmployeeRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,7 @@ public class EmployeeService {
     private CheckInRepository checkInRepository;
 
 //    @Autowired
-//    private CheckInRepository checkInRepository;
+//    private EntityManager entityManager;
 
     //1) Allows users to register a check-in //Post
     //2) Retrieve check-in and check-out records. //Get
@@ -36,18 +38,27 @@ public class EmployeeService {
     //1
     public EmployeeModel registerCheckIn(String name, String department, String position, String email, String phone) {
         EmployeeModel employeeModel = new EmployeeModel();
+        CheckInModel checkInModel = new CheckInModel();
+
+        if(employeeRepository.existsByPhone(phone) || employeeRepository.existsByEmail(email)){
+            throw new IllegalArgumentException("One user has the same number or the same email");
+        }
+
         employeeModel.setName(name);
-//        employeeModel.setCheckInTime(LocalDateTime.now());
-//        employeeModel.setCheckOutTime(LocalDateTime.now());
         employeeModel.setDepartment(department);
         employeeModel.setPosition(position);
         employeeModel.setEmail(email);
         employeeModel.setPhone(phone);
-        CheckInModel checkInModel = new CheckInModel();
+        employeeRepository.save(employeeModel);
+
         checkInModel.setCheckInTime(LocalDateTime.now());
         checkInModel.setCheckOutTime(LocalDateTime.now());
         checkInModel.setStatus(false);
+        checkInModel.setEmployee(employeeModel);
+        checkInModel.setPerson(employeeModel.getId());
         employeeModel.getCheckIns().add(checkInModel);
+
+
         return employeeRepository.save(employeeModel);
     }
 
@@ -69,6 +80,7 @@ public class EmployeeService {
     }
 
 
+
     //2
     public List<EmployeeModel> getRecords(){
         List<EmployeeModel> records = new ArrayList<>();
@@ -79,11 +91,14 @@ public class EmployeeService {
     }
 
     //3
-    public EmployeeModel updateCheckOut(Long id) {
+    public EmployeeModel updateStatus(Long id, Long checkInId) {
         EmployeeModel employeeModel = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
-//        employeeModel.setCheckOutTime(now());
-        EmployeeModel updatedPerson = employeeRepository.save(employeeModel);
-        return updatedPerson;
+        employeeRepository.save(employeeModel);
+        CheckInModel checkInModel = checkInRepository.findById(checkInId).orElseThrow(NoSuchElementException::new);
+        checkInModel.setCheckOutTime(LocalDateTime.now());
+        checkInModel.setStatus(true);
+        employeeModel.getCheckIns().add(checkInModel);
+        return  employeeRepository.save(employeeModel);
     }
 
     //4
