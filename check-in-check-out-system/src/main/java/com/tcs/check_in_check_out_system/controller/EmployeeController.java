@@ -47,9 +47,9 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}/checkout")
-    public ResponseEntity<EmployeeModel> updateCheckOut(@PathVariable Long id) {
+    public ResponseEntity<EmployeeModel> updateCheckOut(@PathVariable Long id, @RequestParam Long checkInId) {
         try {
-            EmployeeModel employeeModel = employeeService.updateCheckOut(id);
+            EmployeeModel employeeModel = employeeService.updateStatus(id,checkInId);
             return ResponseEntity.ok(employeeModel);
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();

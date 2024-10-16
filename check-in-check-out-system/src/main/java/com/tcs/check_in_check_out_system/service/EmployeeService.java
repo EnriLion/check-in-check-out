@@ -1,11 +1,8 @@
 package com.tcs.check_in_check_out_system.service;
 
-import com.tcs.check_in_check_out_system.model.CheckInModel;
 import com.tcs.check_in_check_out_system.model.EmployeeModel;
 import com.tcs.check_in_check_out_system.repository.CheckInRepository;
 import com.tcs.check_in_check_out_system.repository.EmployeeRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -94,11 +91,11 @@ public class EmployeeService {
     public EmployeeModel updateStatus(Long id, Long checkInId) {
         EmployeeModel employeeModel = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
         employeeRepository.save(employeeModel);
-        CheckInModel checkInModel = checkInRepository.findById(checkInId).orElseThrow(NoSuchElementException::new);
+        CheckInModel checkInModel = checkInRepository.findById(id).orElseThrow(NoSuchElementException::new);
         checkInModel.setCheckOutTime(LocalDateTime.now());
         checkInModel.setStatus(true);
         employeeModel.getCheckIns().add(checkInModel);
-        return  employeeRepository.save(employeeModel);
+        return employeeRepository.save(employeeModel);
     }
 
     //4
